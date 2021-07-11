@@ -3,17 +3,17 @@
 BlogBook is a  CMS-style blog site where developers can publish their blog posts and comment on other developer posts.
 
 ## Contents
+- [Screenshots](#Screenshots)
 - [Deployment](#Deployment)
-- [Usage](#Usage)
 - [Resources](#Contributions)
 - [Reach Out](#Questions)
+
+## Screenshots
+-
 
 ## Deployment
 -   [Heroku]()
 -   [GitHub Pages]()
-
-## Usage
-
 
 ## Contributions
 - [Ritchie Ortiz](https://github.com/xRitchie91)
