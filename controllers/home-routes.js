@@ -80,7 +80,7 @@ router.get('/viewpost/:id', (req, res) => {
   })
     .then(dbPostData => {
       if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
+        res.status(404).json({ message: 'No post found' });
         return;
       }
 
@@ -138,7 +138,7 @@ router.get('/dashboard', (req, res) => {
     })
       .then(dbPostData => {
         if (!dbPostData) {
-          res.status(404).json({ message: 'No post found with this id' });
+          res.status(404).json({ message: 'No post found' });
           return;
         }
   

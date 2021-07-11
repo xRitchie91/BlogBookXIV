@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
   })
     .then(dbUserData => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No user found' });
         return;
       }
       res.json(dbUserData);
@@ -93,7 +93,7 @@ router.post('/login', (req, res) => {
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
+      res.status(400).json({ message: 'Hm.. Something\'s not right!' });
       return;
     }
 
@@ -102,7 +102,7 @@ router.post('/login', (req, res) => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.id;
       req.session.loggedIn = true;
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+      res.json({ user: dbUserData, message: 'Success! You\'re logged in!' });
     });
   });
 });
@@ -119,7 +119,6 @@ router.post('/logout', (req,res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // update what's passed through
   User.update(req.body, {
     individualHooks: true,
     where: {
@@ -147,7 +146,7 @@ router.delete('/:id', (req, res) => {
   })
     .then(dbUserData => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No user found' });
         return;
       }
       res.json(dbUserData);
