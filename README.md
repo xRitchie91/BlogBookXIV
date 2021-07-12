@@ -12,8 +12,8 @@ BlogBook is a  CMS-style blog site where developers can publish their blog posts
 -
 
 ## Deployment
--   [Heroku]()
--   [GitHub Pages]()
+-   [Heroku](https://morning-wildwood-59956.herokuapp.com/)
+-   [GitHub Pages](https://xritchie91.github.io/BlogBookXIV/)
 
 ## Contributions
 - [Ritchie Ortiz](https://github.com/xRitchie91)
