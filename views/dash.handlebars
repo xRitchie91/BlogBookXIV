@@ -1,0 +1,6 @@
+<h1 class="padding-10">Posts</h1>
+<p><a class="link" href="../models/post.js">New Post</a></p>
+{{#each posts as |aPost| }}
+{{!-- Pass data to each individual post --}}
+{{> post aPost}}
+{{/each}}
