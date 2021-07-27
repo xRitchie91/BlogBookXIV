@@ -24,7 +24,7 @@ The user must install the following packages:
 - 
 
 ### Deployment
--   [Heroku](https://morning-wildwood-59956.herokuapp.com/)
+- [Heroku](https://floating-cove-64260.herokuapp.com/)
 
 ## Contributions
 - [Ritchie Ortiz](https://github.com/xRitchie91)
