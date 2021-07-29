@@ -1,0 +1,35 @@
+<section>
+    <h3>Create New Blog Post</h3>
+
+    {{!-- text section where user can input new posts --}}
+    <form class='new-post-form'>
+        <div>
+            <label for='post-title'></label>
+            <input type='text' id='post-title' name='post-title' placeholder="Your post title"/>
+        </div>
+        <div>
+            <label for='post-text'></label>
+            <textarea name='post-text' id='post-text' placeholder="What are you going to blog about today?"></textarea>
+        </div>
+        <div>
+            <button type='submit' class='btn'>Submit</button>
+        </div>
+    </form>
+</section>
+
+{{#if posts.length}}
+
+<section>
+    <h2>Blog Library</h2>
+    <ul>
+        {{#each posts as |post|}}
+        <li>
+            {{> blogpost-info post}}
+            <a href='/dashboard/edit/{{post.id}}' class='edit-link'>Edit</a>
+        </li>
+        {{/each}}
+    </ul>
+</section>
+{{/if}}
+
+<script src="/javascript/create-new-post.js"></script>

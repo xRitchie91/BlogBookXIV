@@ -1,36 +1,53 @@
-<link rel="stylesheet" href="../public/css/login.css">
-<section class="wrapper">
-    <form class="login">
-        <article class="padding-md">
-            <label for="email">email:</label>
-            <input type="text" id="email" />
-        </article>
-        <article class="padding-md">
-            <label for="password">password:</label>
-            <input type="password" id="password" />
-        </article>
-        <article class="padding-md">
-            <button type="submit" id="login-btn">login</button>
-        </article>
-    </form>
+{{!-- signup form --}}
+<form class='signup-form'>
+        <div id='signup_alert_container'></div>
 
-    <form class="signup">
-        <article>
-            <label for="username">username:</label>
-            <input id="username" type="text">
-        </article>
-        <article>
-            <label for="email">email:</label>
-            <input type="text" id="email" />
-        </article>
-        <article>
-            <label for="password">password:</label>
-            <input type="password" id="password" />
-        </article>
-        <article>
-            <button type="submit" id="signup-btn">signup</button>
-        </article>
-    </form>
-</section>
-{{!-- Load the login script --}}
+    {{!-- username signup box --}}
+    <div>
+        <label for='username_signup'>Username:</label>
+        <input type='text' id='username_signup' autocomplete="off"/>
+    </div>
+
+    {{!-- email signup text box --}}
+    <div>
+        <label for='email_signup'>Email:</label>
+        <input type='text' id='email_signup'/>
+    </div>
+
+    {{!-- password signup text box --}}
+    <div>
+        <label for='password_signup'>Password:</label>
+        <input type='password' id='password_signup'/>
+    </div>
+
+    {{!-- signup submit button --}}
+    <div>
+        <button type='submit' id='signup_submit'>Sign Up</button>
+    </div>
+</form>
+
+{{!-- This code will generate the html that will be visible to the user --}}
+
+<form class='login-form'>
+
+    <div id='login_alert_container'></div>
+
+    {{!-- username text box --}}
+    <div>
+        <label for='username_login'>Username:</label>
+        <input type='text' id='username_login' autocomplete="off"/>
+    </div>
+
+    {{!-- password text box --}}
+    <div>
+        <label for='password_login'>Password:</label>
+        <input type='password' id='password_login'/>
+    </div>
+
+    {{!-- sign in submit button --}}
+    <div>
+        <button type='submit' id='login_submit'>Login</button>
+    </div>
+</form>
+
 <script src="../public/js/login.js"></script>
