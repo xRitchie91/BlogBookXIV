@@ -1,30 +1,42 @@
-// Import all the models
-const User = require("./user");
-const Post = require("./post");
-const Comment = require("./comment");
+const User = require('./User');
+const BlogPost = require('./BlogPost');
+const Comment = require('./Comment')
 
-// create associations
-User.hasMany(Post, {
-  foreignKey: "user_id",
-});
-Post.belongsTo(User, {
-  foreignKey: "user_id",
-});
-//associations for the commments
-Comment.belongsTo(User, {
-  foreignKey: "user_id",
-});
+//create associations
 
-Comment.belongsTo(Post, {
-  foreignKey: "post_id",
-});
+//a user can have many blog posts
+User.hasMany(BlogPost, {
+    foreignKey: 'user_id'
+})
 
+//user can have many comments
 User.hasMany(Comment, {
-  foreignKey: "user_id",
-});
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+})
 
-Post.hasMany(Comment, {
-  foreignKey: "post_id",
-});
+//a blog post can belong to one user
+BlogPost.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+})
 
-module.exports = { User, Post, Comment };
+//posts can have many comments
+BlogPost.hasMany(Comment, {
+    foreignKey: 'post_id',
+    onDelete: 'SET NULL'
+})
+
+//comments belong to one user
+Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+})
+
+//comments belong to one blog post
+Comment.belongsTo(BlogPost, {
+    foreignKey: 'post_id',
+    onDelete: 'SET NULL'
+})
+
+module.exports = {User, BlogPost, Comment}
