@@ -1,10 +1,12 @@
+
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const {Post, User, Comment} = require('../models')
+const {BlogPost, User, Comment} = require('../models')
 
 
 router.get('/', (req, res) => {
-Post.findAll({
+    
+BlogPost.findAll({
     attributes: ['id', 'title', 'post_text', 'created_at'],
     order: [['created_at', 'DESC']],
     include: [
@@ -22,9 +24,10 @@ Post.findAll({
         }
     ]
     })
+
     .then(postData => {
         const posts = postData.map(post => post.get({ plain: true }))
-        res.render('home', { posts, loggedIn: req.session.loggedIn, username: req.session.username })
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn, username: req.session.username })
     })
     .catch(err => res.status(500).json(err))
 });
@@ -58,11 +61,13 @@ BlogPost.findOne({
         }
     ]
 })
+
 .then(postData => {
     if(!postData){
         res.status(404).json({message: 'Post not found!'});
         return
-    }    
+    }  
+
 const post = postData.get({plain: true})
 res.render('single-blogpost', { post, loggedIn: req.session.loggedIn, username: req.session.username })
 })

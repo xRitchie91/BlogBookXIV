@@ -5,6 +5,7 @@ const authenticateUser = require('../../utils/auth')
 // get existing comments
 router.get('/', (req, res) => {
     Comment.findAll({
+
     })
     .then(commentData => res.json(commentData))
     .catch(err => res.status(500).json(err))
