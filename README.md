@@ -1,6 +1,6 @@
 # BlogBook
 ## Summary
-BlogBook is a  CMS-style blog site where developers can publish their blog posts and comment on other developer posts.
+BlogBook is a CMS-style blog site where developers can publish their blog posts and comment on other developer posts.
 
 ## Contents
 - [Usage](#Usage)
@@ -24,10 +24,11 @@ The user must install the following packages:
 - 
 
 ### Deployment
-- [Heroku](https://floating-cove-64260.herokuapp.com/)
+-   [Heroku](https://morning-wildwood-59956.herokuapp.com/)
 
 ## Contributions
 - [Ritchie Ortiz](https://github.com/xRitchie91)
+- [Dakota Nelson](https://github.com/kotalilyy)
 - [Nancy Rosas](https://github.com/nancyrosas0) 
 - [Kyle McKinley](https://github.com/kjmckinley)
 
