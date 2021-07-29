@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 require('dotenv').config();
 
-// creates connection to database, pass in MySQL information 
+// creates database connection, passes MySQL info 
 //module.exports = sequelize;
 const sequelize = process.env.JAWSDB_URL
   ? new Sequelize(process.env.JAWSDB_URL)
