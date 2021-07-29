@@ -22,5 +22,4 @@ async function editPost(event) {
     }
   }
 
-
 document.querySelector('.edit-post-form').addEventListener('submit', editPost)

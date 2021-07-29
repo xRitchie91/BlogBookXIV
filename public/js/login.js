@@ -1,10 +1,10 @@
 
-// function uses regex to validate if user input a valid email format
+// our boy reggie (regex)
 function validateUserEmail (email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
-// function that allows user to sign up if they have no existing login info.
+// allows signup if no existing login info.
 async function signUpPage (event) {
     event.preventDefault();
 
@@ -28,7 +28,7 @@ async function signUpPage (event) {
         if(res.ok){
             document.location.replace('/dashboard/')
         }
-        // update signup alert to inform the user that the email they entered already exists
+        // email they entered already exists
         if(res.status === 500){
             $('#signup_alert_container').html('')
             $('#signup_alert_container').append(`
@@ -51,7 +51,7 @@ async function signUpPage (event) {
         </div>
         `)
     }
-    // alerts user that they cannot leave username field blank
+    // no blank usernames
     if(!username){
         $('#signup_alert_container').html('')
         $('#signup_alert_container').append(`
@@ -62,7 +62,7 @@ async function signUpPage (event) {
         </div>
         `)
     }
-    // alerts user that they cannot leave the password field blank
+    // dont enter a blank password!
     if(!password){
         $('#signup_alert_container').html('')
         $('#signup_alert_container').append(`
@@ -73,7 +73,7 @@ async function signUpPage (event) {
         </div>
         `)
     }
-    // alert user if their password is not long enough
+    // make your pass longer fam!
     if(password.length < 8){
         $('#signup_alert_container').html('')
         $('#signup_alert_container').append(`
@@ -97,14 +97,14 @@ async function signUpPage (event) {
     }
 }
 
-// function that allows user to login if they have signed up before./
+// allows existing users to log in
 async function login (event) {
     event.preventDefault();
 
     const username = document.querySelector('#username_login').value.trim();
     const password = document.querySelector('#password_login').value.trim();
 
-    // allows access if the username/password are valid
+    // opens the door to the club if the credentials are right
     if(username && password){
         const res = await fetch('/api/users/login', {
             method: 'POST',
@@ -118,7 +118,7 @@ async function login (event) {
             document.location.replace('/dashboard');
         }
 
-        // alerts user that the password they entered was incorrect
+        // your password is wrong my guy!
         if(res.status === 400){
             $('#login_alert_container').html('')
             $('#login_alert_container').append(`
@@ -129,7 +129,7 @@ async function login (event) {
             </div>
             `)
         }
-        // alerts user that the username they entered is incorrect
+        // your username is wrong family!
         if(res.status === 404){
             $('#login_alert_container').html('')
             $('#login_alert_container').append(`
@@ -141,7 +141,7 @@ async function login (event) {
             `)
         }
     }
-    // alerts user not to leave the username field blank
+    // tells user to enter a username
     if(!username){
         $('#login_alert_container').html('')
         $('#login_alert_container').append(`
@@ -152,7 +152,7 @@ async function login (event) {
         </div>
         `)
     }
-    // alerts user that they cannot leave the password field blank
+    // tells the user to fix their stuffs to have a valid password
     if(!password){
         $('#login_alert_container').html('')
         $('#login_alert_container').append(`
@@ -163,7 +163,7 @@ async function login (event) {
         </div>
         `)
     }
-    // alerts the user that both fields cannot be blank
+    // lets the user know they goobed up! fix it yo!
     if(!username && !password){
         $('#login_alert_container').html('')
         $('#login_alert_container').append(`
@@ -176,6 +176,6 @@ async function login (event) {
     }
 }
 
-// buttons that activate appropriate functions when clicked
+// activates their functions when clicked
 $('#login_submit').on('click', login)
 $('#signup_submit').on('click', signUpPage)
