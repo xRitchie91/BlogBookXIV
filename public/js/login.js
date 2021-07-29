@@ -1,75 +1,162 @@
-//handlelogin
-async function loginFormHandler(event) {
-    event.preventDefault();
-    const loginEmail = document.querySelector("#email-login").value.trim();
-    const password = document.querySelector("#password-login").value.trim();
-  
-    //make sure they are filled
-    if (loginEmail && password) {
-      const response = await fetch("/api/users/login", {
-        method: "post",
-        body: JSON.stringify({
-          loginEmail,
-          password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (response.ok) {
-        console.log(response, " Logged in successfully!");
-        document.location.replace("/");
-      } else {
-        alert(response.statusText);
+function isValidEmail (email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+async function signUp (event) {
+  event.preventDefault();
+
+  const username = document.querySelector('#username_signup').value.trim();
+  const email = document.querySelector('#email_signup').value.trim()
+  const validEmail = isValidEmail(email);
+  const password = document.querySelector('#password_signup').value.trim();
+
+
+  if(username && validEmail && password){
+      const res = await fetch('api/users', {
+          method: 'post',
+          body: JSON.stringify({
+              username,
+              email,
+              password
+          }),
+          headers: {'Content-Type': 'application/json'}
+      })
+      if(res.ok){
+          document.location.replace('/dashboard/')
       }
-    }
+      if(res.status === 500){
+          $('#signup_alert_container').html('')
+          $('#signup_alert_container').append(`
+          <div>
+              <strong>
+                  Email address already exists.
+              </strong>
+          </div>
+          `)
+      }
   }
-  
-  //handle signup/register
-  async function signupFormHandler(event) {
-    event.preventDefault();
-    const username = document.querySelector("#username-signup").value.trim();
-    const signupEmail = document.querySelector("#email-signup").value.trim();
-    const password = document.querySelector("#password-signup").value.trim();
-    //check to make sure all fields have values
-    if (username && signupEmail && password) {
-      const response = await fetch("/api/users", {
-        method: "post",
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (response.ok) {
-        console.log(response);
-      } else {
-        alert(response.statusText);
-      }
-      // request to log in
-      const responseTwo = await fetch("/api/users/login", {
-        method: "post",
-        body: JSON.stringify({
-          LoginEmail,
-          password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (responseTwo.ok) {
-        console.log(response, " Logged in successfully!");
-        document.location.replace("/");
-      } else {
-        alert(response.statusText);
-      }
-    }
+  if(!validEmail){
+      $('#signup_alert_container').html('')
+      $('#signup_alert_container').append(`
+      <div>
+          <strong>
+              Enter a valid email adress.
+          </strong>
+      </div>
+      `)
   }
-  //Add event listeners to the buttons
-  document
-    .querySelector("#login-btn")
-    .addEventListener("click", loginFormHandler);
-  
-  document
-    .querySelector("#signup-btn")
-    .addEventListener("click", signupFormHandler);
+  if(!username){
+      $('#signup_alert_container').html('')
+      $('#signup_alert_container').append(`
+      <div>
+          <strong>
+              Username is required.
+          </strong>
+      </div>
+      `)
+  }
+  if(!password){
+      $('#signup_alert_container').html('')
+      $('#signup_alert_container').append(`
+      <div>
+          <strong>
+              Password is required.
+          </strong>
+      </div>
+      `)
+  }
+  if(password.length < 8){
+      $('#signup_alert_container').html('')
+      $('#signup_alert_container').append(`
+      <div>
+          <strong>
+              Password must be at least 8 characters.
+          </strong>
+      </div>
+      `)
+  }
+  if(!email && !username && !password){
+      $('#signup_alert_container').html('')
+      $('#signup_alert_container').append(`
+      <div>
+          <strong>
+              Please fill out all fields.
+          </strong>
+      </div>
+      `)
+  }
+}
+async function login (event) {
+  event.preventDefault();
+
+  const username = document.querySelector('#username_login').value.trim();
+  const password = document.querySelector('#password_login').value.trim();
+
+  if(username && password){
+      const res = await fetch('/api/users/login', {
+          method: 'POST',
+          body: JSON.stringify({
+              username,
+              password
+          }),
+          headers: {'Content-Type': 'application/json'}
+      })
+      if(res.ok){
+          document.location.replace('/dashboard');
+      }
+
+      if(res.status === 400){
+          $('#login_alert_container').html('')
+          $('#login_alert_container').append(`
+          <div>
+              <strong>
+                  Incorrect password.
+              </strong>
+          </div>
+          `)
+      }
+      if(res.status === 404){
+          $('#login_alert_container').html('')
+          $('#login_alert_container').append(`
+          <div>
+              <strong>
+                  Incorrect username.
+              </strong>
+          </div>
+          `)
+      }
+  }
+  if(!username){
+      $('#login_alert_container').html('')
+      $('#login_alert_container').append(`
+      <div>
+          <strong>
+              Username is required.
+          </strong>
+      </div>
+      `)
+  }
+  if(!password){
+      $('#login_alert_container').html('')
+      $('#login_alert_container').append(`
+      <div>
+          <strong>
+              Password is required.
+          </strong>
+      </div>
+      `)
+  }
+  if(!username && !password){
+      $('#login_alert_container').html('')
+      $('#login_alert_container').append(`
+      <div>
+          <strong>
+              Username and password are required.
+          </strong>
+      </div>
+      `)
+  }
+}
+
+$('#login_submit').on('click', login)
+$('#signup_submit').on('click', signUp)

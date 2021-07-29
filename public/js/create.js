@@ -1,30 +1,20 @@
-async function createPostHandler(event) {
-    event.preventDefault();
-    //get info 
-    const postTitle = document.querySelector("#post-title").value.trim();
-    const body = document.querySelector("#post-body").value.trim();
+async function newPost(event) {
+  event.preventDefault();
+  const title = document.querySelector('input[name="post-title"]').value;
+  const post_text = document.querySelector('textarea[name="post-text"]').value;
 
-    if (body) {
-      // comment text
-      const response = await fetch("/api/posts", {
-        method: "POST",
-        body: JSON.stringify({
+  const res = await fetch(`/api/posts`, {
+      method: 'POST',
+      body: JSON.stringify({
           title,
-          body,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      if (response.ok) {
-        document.location.replace("/dashboard"); 
-      } else {
-        alert(response.statusText); 
-      }
-    }
+          post_text
+      }),
+      headers : {'Content-Type': 'application/json'}
+  });
+  if(res.ok){
+      document.location.reload('/dashboard')
+  } else {
+      alert(res.statusText)
   }
-  
-  document
-    .querySelector("#create-post-btn")
-    .addEventListener("click", createPostHandler);
+}
+document.querySelector('.new-post-form').addEventListener('submit', newPost)
